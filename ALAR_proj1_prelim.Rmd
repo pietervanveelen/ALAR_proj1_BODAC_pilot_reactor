@@ -1,0 +1,727 @@
+---
+title: "ALAR Proj1 Pilot BODAC"
+author: "Pieter van Veelen"
+date: "2024-08-23"
+output: html_document
+---
+
+```{r setup, include=T}
+knitr::opts_chunk$set(echo = TRUE)
+knitr::opts_chunk$set(engine.opts = list(bash = "-l"))
+
+options(scipen = 999)
+
+## packages required
+packages <- c("phyloseq", "qiime2R", "tidyverse", "magrittr", "devtools", "qiime2R", "here", "breakaway", "DivNet", "openxlsx", "ape", "vegan", "ggtext", "cowplot", "RColorBrewer", "microbiome", "lme4", "lmerTest","decontam", "remotes", "ampvis2", "speedyseq", "ggh4x", "kableExtra", "phia", "MASS", "ggord", "glue", "lubridate")
+
+# install packages not yet installed
+installed_packages <- packages %in% rownames(installed.packages())
+if (any(installed_packages == FALSE)) {
+  install.packages(packages[!installed_packages])
+}
+# 
+# # packages not available for R 4.1.2
+# ## phyloseq
+# if(!requireNamespace("BiocManager")){install.packages("BiocManager")}
+# BiocManager::install("phyloseq")
+# 
+# ## qiime2R
+# if (!requireNamespace("devtools", quietly = TRUE)){install.packages("devtools")}
+# devtools::install_github("jbisanz/qiime2R")
+# 
+# ## breakaway
+# install.packages("devtools")
+# devtools::install_github("adw96/breakaway")
+# 
+# ## DivNet
+# remotes::install_github("adw96/breakaway")
+# remotes::install_github("adw96/DivNet")
+# 
+# ## microbiome
+# library(BiocManager)
+# BiocManager::install("microbiome")
+# 
+# ## decontam
+# if (!requireNamespace("BiocManager", quietly = TRUE))
+# install.packages("BiocManager")
+# BiocManager::install("decontam")
+# 
+# ## ampvis2
+# if (!requireNamespace("ampvis2", quietly = TRUE))
+# install.packages("ampvis2")
+# remotes::install_github("MadsAlbertsen/ampvis2", Ncpus = 6)
+# 
+## speedyseq
+if (!requireNamespace("speedyseq", quietly = TRUE))
+    install.packages("speedyseq")
+remotes::install_github("mikemc/speedyseq")
+# 
+## ggord
+if (!requireNamespace("ggord", quietly = TRUE))
+install.packages("remotes")
+remotes::install_github("fawda123/ggord")
+
+```
+
+## Exploratory data analysis
+
+### Loading libraries
+
+```{r library loading, message=F, echo=T, eval=T, warning=T, include=T, cache=F}
+# load required packages
+library(magrittr)
+#library(speedyseq)
+library(phyloseq)
+library(qiime2R)
+library(magrittr)
+library(devtools)
+library(qiime2R)
+library(here)
+library(breakaway)
+library(DivNet)
+library(openxlsx)
+library(ape)
+library(vegan)
+library(ggtext)
+library(cowplot)
+library(RColorBrewer)
+library(microbiome)
+library(lme4)
+library(lmerTest)
+library(decontam)
+library(remotes)
+library(ampvis2)
+library(ggh4x)
+library(ggord)
+library(glue)
+library(lubridate)
+library(phia)
+library(kableExtra)
+library(MASS)
+library(tidyverse)
+#library(MicrobiotaProcess)
+
+```
+
+```{r define colors, warning=F, message=F}
+
+# color pallette
+#pal = wes_palette("FantasticFox1", n = 5)
+pal = c("#8ACDEA", "#FCB97D","#2AB7CA","grey10","#F3B61F", "#2E86AB","#F56476")
+
+# set colorset
+dark2_colors <- brewer.pal(8, "Dark2")
+paired_colors <- brewer.pal(12, "Paired")
+set_colors <- brewer.pal(8, "Set2")
+set1_colors <- brewer.pal(8, "Set1")
+additional_colors <- 50 - length(dark2_colors) - length(paired_colors) -length(set_colors) -length(set1_colors)
+additional_palette <- c("#1f77b4", "#ff7f0e", "#2ca02c", "#d62728", "#9467bd", "#8c564b", "#e377c2", "#7f7f7f", "#bcbd22", "#17becf",
+                        "#aec7e8", "#ffbb78", "#98df8a", "#ff9896", "#c5b0d5", "#c49c94", "#f7b6d2", "#c7c7c7", "#dbdb8d", "#9edae5",
+                        "#393b79")
+
+
+# Combine the palettes
+colorset <- c(dark2_colors, paired_colors, set_colors, set1_colors, additional_palette[1:additional_colors])
+
+```
+
+```{r project organization, message=F, echo=T, eval=T, warning=T, include=T, cache=F}
+
+# project
+proj = "ALAR_proj1_Q17713"
+
+# create directories
+if(!dir.exists("input_data")){dir.create("input_data")}
+if(!dir.exists("output_data")){dir.create("output_data")}
+if(!dir.exists("figures")){dir.create("figures")}
+if(!dir.exists("scripts")){dir.create("scripts")}
+
+```
+
+```{bash}
+
+# copy scripts folder
+cp -R /Users/pvee/Wetsus_Projects/OSOJ/data_analysis/scripts ./
+
+```
+
+#### 1) Import QIIME2 output data
+```{r import data, message=F, echo=T, eval=T, warning=F, include=T, cache=F}
+
+# creating phyloseq objects for Q16347
+physeq = qza_to_phyloseq(
+  features = "input_data/ALAR_16S_515F_926R_09072024_Q17713_ALAR_table.qza",
+  tree = "input_data/ALAR_16S_515F_926R_09072024_Q17713_ALAR_rooted-tree.qza",
+  taxonomy = "input_data/ALAR_16S_515F_926R_09072024_Q17713_ALAR_silva-138-99-nb-classifier_515f_926R.qza",
+  metadata = "input_data/ALAR_16S_515F_926R_09072024_Q17713_ALAR@metadata_formatted.txt")
+
+
+
+# add study ID to sample data
+sample_data(physeq)$study_id = "ALAR_proj1_Q17713"
+
+# list physeq objects
+physeq_list = list(physeq = physeq)
+
+```
+
+#### 1) Resolve phylogenetic tree
+
+```{r clean phylogeny, message=F, echo=T, eval=T, warning=T, include=T, cache=F}
+
+# Define function to process physeq objects for resolving multichotomies using Ape
+process_physeq <- function(physeq_list) {
+  resolved_physeq_list <- lapply(physeq_list, function(physeq) {
+    # Check if the tree is binary
+    if (!ape::is.binary(phy_tree(physeq))) {
+      # Resolve polychotomous nodes
+      phy_tree_resolved <- ape::multi2di(phy_tree(physeq))
+      # Check if resolved
+      if (!ape::is.binary(phy_tree_resolved)) {
+        stop("Error: Unable to resolve polychotomous nodes.")
+      }
+      # Update tree
+      tree2 <- phy_tree_resolved
+    } else {
+      # Use the original tree if it's already binary
+      tree2 <- phyloseq::phy_tree(physeq)
+    }
+    
+    # Merge new tree with sample_data and otu_table
+    psdata <- phyloseq::merge_phyloseq(
+      phyloseq::otu_table(physeq), 
+      phyloseq::sample_data(physeq), 
+      phyloseq::tax_table(physeq), 
+      tree2)
+    
+    phyloseq::sample_data(psdata)$sampleid <- phyloseq::sample_names(psdata)
+    
+    return(psdata)
+  })
+  
+  return(resolved_physeq_list)
+}
+
+# exec function on physeq_list
+resolved_physeq_list = process_physeq(physeq_list)
+
+```
+
+```{r clean taxanomy naming, message=F, echo=F, eval=T, warning=F, include=F, cache=F}
+
+# Define a function to clean taxonomy and return the result
+clean_physeq <- function(physeq_list) {
+  source("scripts/tax_clean_updated.R")  # Source the tax_clean_updated.R script
+  
+  # Define a function to process each physeq object
+  process_physeq <- function(physeq) {
+    physeq_clean <- tax_clean(physeq)  # Clean taxonomy
+    return(physeq_clean)                # Return cleaned physeq object
+  }
+  
+  # Apply the function to each element of the resolved_physeq_list
+  cleaned_physeq_list <- lapply(physeq_list, process_physeq)
+  
+  return(cleaned_physeq_list)  # Return the list of cleaned physeq objects
+}
+
+# Execute cleaning taxonomy table
+cleaned_physeq_list <- clean_physeq(resolved_physeq_list)
+## adjust tax_clean_updated.R script to keep Eukarya and unassigned Bacteria
+
+# check tax table after cleaning if all mitochondria and chloroplasts and unassigned phyla are removed
+#phyloseq::tax_table(cleaned_physeq_list$proj3_Q16347) %>% view
+
+```
+
+```{r assessment of Mock Genera in Samples OSOJ, fig.width=14, fig.height=10}
+
+# evaluate mock species in samples
+cleaned_physeq_list$physeq
+# remove Mitochondria
+physeq_clean = 
+  cleaned_physeq_list$physeq %>% 
+  subset_taxa(
+    Class != "Chloroplast" & 
+      Order != "Chloroplast" &
+      Family != "Mitochondria" &
+      Kingdom != "d__Eukaryota" &
+      Kingdom != "Unassigned" &
+      Phylum != "Phylum of d__Bacteria"   
+  )
+# add sample read counts
+phyloseq::sample_data(physeq_clean)$sample_sums = sample_sums(physeq_clean) 
+# define sample and contols
+phyloseq::sample_data(physeq_clean)$sample_or_control = 
+  if_else(phyloseq::sample_data(physeq_clean)$sampleid == "ALAR.10", "mock",
+      if_else(grepl("blank", phyloseq::sample_data(physeq_clean)$sampleid), "blank", "sample"))
+
+# calculate relative abundances 
+physeq_clean_rel =
+physeq_clean %>% 
+  subset_samples(., sample_or_control == "mock") %>% 
+  transform_sample_counts(., function(x) x/sum(x)*100) 
+
+# read count statistics study
+physeq_clean_rel %>% 
+  sample_data() %>% 
+  as_tibble() %>% 
+  select(sampleid, study_id, sample_sums) %>% 
+  #group_by(study_id) %>%
+  summarise(min = min(sample_sums), max = max(sample_sums), 
+            median = median(sample_sums), mean = mean(sample_sums), 
+            sd = sd(sample_sums), n= n(), se= sd/sqrt(n))
+
+# view mock community
+mock_set_ps = 
+physeq_clean %>% 
+  transform_sample_counts(., function(x) x/sum(x)*100) %>% 
+  subset_samples(., sample_or_control != "mock" | sample_or_control != "blank") %>% 
+  prune_taxa(taxa_sums(.)>0, .)
+
+# melt and arrange
+mock_set_df = 
+  mock_set_ps %>% 
+  psmelt %>%
+  select(Family, Genus, OTU, study_id, Sample, Abundance, dna_conc_ng_uL) %>% 
+  group_by(Genus, Sample) %>% 
+  arrange(-Abundance) %>% 
+  ungroup()
+
+
+# filter Massilia to find mock Massilia OTU id
+mock_genera = 
+  c("Massilia","Serratia","Vulgatibacter","Brevibacillus","Lysinibacillus","Weizmannia",
+    "Streptomyces","Bacillus","Peribacillus","Bordetella","Sphingobium","Burkholderia-Caballeronia-Paraburkholderia", "Genus of Yersiniaceae")
+
+# extract identities of ASVs affiliated with Mock genera 
+mock_ASVs = 
+  mock_set_df %>% 
+  filter(Genus %in% c(mock_genera 
+                      ,"Genus of Bacilli", "Genus of Bacillaceae", "Genus of Bacillales",
+                      "Genus of Planococcaceae",
+                      "Genus of Burkholderiaceae", "Genus of Burkholderiales"
+                      )) %>% 
+  pull(OTU) %>% 
+  unique()
+
+# count number of ASVs found per Genus (level tax group)
+mock_set_df %>% 
+  filter(Genus %in% c(mock_genera 
+                      ,"Genus of Bacilli", "Genus of Bacillaceae", "Genus of Bacillales",
+                      "Genus of Planococcaceae",
+                      "Genus of Burkholderiaceae", "Genus of Burkholderiales",
+                      "Genus of Sphingomonadaceae"
+                      )) %>% 
+  group_by(Genus) %>% 
+  distinct(OTU) %>% 
+  summarise(ASV_n = n_distinct(OTU))
+
+# examplOTU# example to find all unique ASVs for the Mock genera of interest
+# mock_set_df %>% 
+#   filter(Genus == "Massilia" | Genus == "Bacillus") %>% 
+#   group_by(Genus) %>% 
+#   summarise(ASV = unique(OTU))
+
+# psmelt the complete set
+physeq_clean_psmelt = psmelt(physeq_clean)
+physeq_clean_psmelt = 
+  physeq_clean_psmelt %>% 
+  as_tibble() %>% 
+  mutate(quantus_ng_ul = as.numeric(str_replace(dna_conc_ng_uL, ",", "."))) %>% 
+  select(study_id, Sample, Abundance, OTU, Kingdom:Species, quantus_ng_ul) 
+  
+
+# filter mock genera based on ASV name list
+mock_in_samples_set =
+  physeq_clean_psmelt %>%
+  filter(OTU %in% mock_ASVs) 
+
+
+# Check if Massilia OTU ids exist after removing the two mock Massilia IDs 
+mock_in_samples_set %>%
+  filter(!OTU %in% mock_ASVs) %>%
+  filter(Genus == "Massilia") %>%
+  pull(OTU) %>%
+  unique()
+
+# define ASVs to remove from samples (leave Massilia, Sphingobium and Burkholderia-Caballeronia-Paraburkholderia in, as these taxa are more abundant in DW samples than in mock and are known to be part of the natural DW microbiome.
+
+mock_asvs_to_remove = 
+  setdiff(mock_ASVs,
+          c(mock_in_samples_set %>% select(OTU, Genus) %>% filter(Genus == "Sphingobium") %>% unique %>% pull(OTU),
+            mock_in_samples_set %>% select(OTU, Genus) %>% filter(Genus == "Massilia") %>% unique %>% pull(OTU),
+            mock_in_samples_set %>% select(OTU, Genus) %>% filter(Genus == "Burkholderia-Caballeronia-Paraburkholderia") %>% unique %>% pull(OTU)
+          ))
+
+# plot mock Genera in samples (excluding Massilia)
+# plot_mock = 
+# mock_in_samples_set %>% 
+#   filter(Genus != "Massilia" & Genus != "Sphingobium") %>% 
+#   #filter(!OTU %in% mock_asvs_to_remove) %>% 
+#   ggplot(aes(x=Sample, y = Abundance, fill = Genus)) +
+#   geom_col() +
+#   geom_point(aes(x=Sample, y = Abundance), inherit.aes = F) +
+#   scale_fill_manual(values = colorset) +
+#   coord_flip() +
+#   scale_y_continuous(limits = c(-5, 20),
+#                      sec.axis = sec_axis(~ . / max(mock_in_samples_set$Abundance), name = "Ratio sample/mock DNA conc.")) + facet_grid(rows = vars(study_id), scales = "free")
+# 
+# plot_mock_dna_logratio = 
+# mock_in_samples_set %>% 
+#   filter(Genus != "Massilia" & Genus != "Sphingobium") %>% 
+#   #filter(!OTU %in% mock_asvs_to_remove) %>% 
+#   ggplot(aes(x=Sample, y = Abundance, fill = Genus)) +
+#   geom_col() +
+#   geom_point(aes(x=Sample, y = logratio_dna_sample_mock), inherit.aes = F) +
+#   scale_fill_manual(values = colorset) +
+#   coord_flip() +
+#   scale_y_continuous(limits = c(-5, 20),
+#                      sec.axis = sec_axis(~ . / max(mock_in_samples_set$Abundance), name = "log ratio sample/mock DNA conc.")) + facet_grid(rows = vars(study_id), scales = "free")
+#  
+# 
+# plot_mock_dna_diff = 
+# mock_in_samples_set %>% 
+#   filter(Genus != "Massilia" & Genus != "Sphingobium") %>% 
+#   #filter(!OTU %in% mock_asvs_to_remove) %>% 
+#   ggplot(aes(x=Sample, y = Abundance, fill = Genus)) +
+#   geom_col() +
+#   geom_point(aes(x=Sample, y = diff_dna_sample_mock), inherit.aes = F) +
+#   scale_fill_manual(values = colorset) +
+#   coord_flip() +
+#   scale_y_continuous(limits = c(-5, 20),
+#                      sec.axis = sec_axis(~ . / max(mock_in_samples_set$Abundance), name = "Difference Sample - Mock DNA conc.")) + facet_grid(rows = vars(study_id), scales = "free")
+#  
+# plot_fig <- cowplot::plot_grid(plot_mock_dna_ratio + theme(legend.position = "none"), 
+#                                plot_mock_dna_logratio + theme(legend.position = "none"), 
+#                                plot_mock_dna_diff + theme(legend.position = "none"),
+#                                get_legend(plot_mock_dna_ratio + 
+#                                             theme(legend.position = "bottom",
+#                                                   legend.direction = "vertical")), 
+#                                labels = c("A", "B", "C"),
+#                                ncol = 4, 
+#                                rel_widths = c(4, 4, 4, 3))
+# 
+# 
+# plot_fig
+# # now extend this OTU ID approach to all mock genera
+
+```
+
+
+```{r subset samples plot 1, warning=F, message=F}
+
+# subset samples according to OSOJ instructions:
+
+# Plot 1:
+
+# subset the samples for run 1
+psdata_plot1.1 =
+  cleaned_physeq_list$physeq %>% 
+  subset_samples(., !is.na(pilot)) %>% 
+  prune_taxa(
+    taxa_sums(.) > 0, .)
+
+# tax glom to Genus
+psdata_plot1_Genus = 
+psdata_plot1.1 %>% 
+  transform_sample_counts(., function(x) x/sum(x)*100) %>% 
+  tax_glom(., taxrank = "Genus")
+
+# run Psmelt
+psmelt_plot1_Genus = 
+  psmelt(psdata_plot1_Genus) %>% 
+  as_tibble() %>%
+  select(Genus, Sample,Samples_type, pilot, granule_type, year, Abundance) %>% 
+  group_by(Genus, Sample,Samples_type, pilot, granule_type, year) %>% 
+  summarise(mean_abundance = mean(Abundance), .groups = "drop") 
+
+# define Genus pool rare
+Genus_pool <- 
+  psmelt_plot1_Genus %>% 
+  group_by(Genus) %>% 
+  summarize(pool = max(mean_abundance) < 3, 
+            mean = mean(mean_abundance), 
+            .groups = "drop") 
+  
+```
+
+```{r plot 1 barplot, warning=F, message=F}
+
+# data
+plot1_data = 
+  inner_join(psmelt_plot1_Genus, Genus_pool, by="Genus") %>% 
+  mutate(Genus = if_else(pool, "Other (< 3%)", Genus)) %>% 
+  group_by(Genus, Sample,Samples_type, pilot, granule_type, year) %>%
+  summarize(mean_abundance = sum(mean_abundance), 
+            mean = min(mean),
+            .groups = "drop") %>% 
+  mutate(Genus = factor(Genus), 
+         Genus = fct_reorder(Genus, mean, .desc = T),
+         Genus = fct_shift(Genus, n=-1)) 
+
+# save plot data
+write_csv(plot1_data, file = glue::glue("output_data/{proj}_Plot1_barplot_data.csv"))
+          
+# plot barplot Genus level   
+plot1 = 
+plot1_data %>% 
+ggplot(aes(x=Sample, y = mean_abundance, fill = Genus)) +
+  geom_col() +
+  scale_y_continuous(expand = c(0,0)) +
+  labs(x=NULL, y="Mean Relative Abundance (%)") +
+  scale_fill_manual(name="Genus",
+                    values = colorset) +
+  theme_classic() +
+  theme(axis.text.x = element_markdown(angle = 90),
+        legend.text = element_markdown(),
+        legend.key.size = unit(10, "pt"),
+        legend.position = "bottom") +
+  facet_nested(cols = vars(Samples_type, pilot, granule_type), scales = "free", space="free") +
+  guides(fill = guide_legend(nrow=7))
+
+
+print(plot1)
+
+# save plot
+ggsave(plot = plot1, filename = glue::glue("figures/{proj}_Plot1_sample_type_source_granule_type_Genus_abundances.pdf"), width = 7, height = 5)
+
+
+```
+
+```{r alpha diversity rarefy, message=F, warning=F}
+
+# rarefy samples prior to alpha diversity estimation
+
+source("scripts/avgrarefy.r")
+source("scripts/amp_rarecurve.R")
+
+# create subset frequency matrix
+ALAR_matrix <- as(t(otu_table(psdata_plot1.1)), "matrix")
+
+# determine minimal sampling depth
+min_sample <- min(sample_sums(psdata_plot1.1)) # 334506
+
+    # show rarefaction of genus abundances
+    amp_rarecurve(psdata_plot1.1, color = "sampleid", legend.position = "bottomright", xlim = c(0, min_sample))
+    # Genus abundances of absolute counts after cleaning almost all saturated at minimal coverage
+
+# rarefaction taking mean of 100 iterations
+set.seed(711)
+ALAR_matrix_rare334506_table = avgrarefy(x=ALAR_matrix, sample = min_sample, iterations = 100, seed = 711)
+
+# create phyloseq object with rarefied data
+psdata_ALAR_rare <- psdata_plot1.1
+otu_rare = otu_table(data.frame(t(ALAR_matrix_rare334506_table)), taxa_are_rows = TRUE)
+otu_table(psdata_ALAR_rare) <- otu_rare
+
+```
+
+```{r}
+#### Alpha Diversity Genus
+### ASV Alpha diversity Genus level ###
+psdata_ALAR_rare_Genus = 
+  psdata_ALAR_rare %>% 
+  tax_glom(., "Genus")
+
+# rarefied
+alpha_genus <- estimate_richness(psdata_ALAR_rare_Genus, measures = c("Observed", "Chao1", "Shannon"))
+alpha_genus$Sample <- row.names(alpha_genus)
+
+metadata_genus = 
+  sample_data(psdata_ALAR_rare_Genus) %>% 
+  data.frame() %>% 
+  as_tibble() %>% 
+  mutate(Sample = sample_names(psdata_ALAR_rare_Genus)) %>% 
+  select(Sample, everything()) 
+
+# join alpha diversity with metadata
+alpha2_genus <- inner_join(metadata_genus, alpha_genus, by = "Sample") 
+
+# write alpha diversity plot data
+alpha2_genus %>% write_csv(file = glue::glue("{proj}_alpha_diversity_plot_data_genus_rarefied.csv"))
+
+# plot alpha diversity
+Chao1_genus <- 
+alpha2_genus %>% 
+ggplot(aes(x=Sample, y=Chao1)) +
+  stat_summary(aes(fill = granule_type, group = granule_type), 
+               fun = median, 
+               geom = "bar", alpha = 0.7, width= 0.9,
+               position = position_dodge2(width = 0.7, preserve = "single")) +
+  geom_point(aes(fill = granule_type, group = granule_type, shape = as.factor(year)), color="black",
+                 position = position_dodge(width = 0.9),
+                 size = 2, show.legend = F) +
+  scale_color_manual(values = colorset) +
+  scale_fill_manual(values = colorset, 
+                    #labels = PMA_label, 
+                    name=NULL) +
+  scale_shape_manual(values = c(21, 22, 23)) +
+  theme_minimal() +
+  theme(axis.text.x = element_text(angle = 0, hjust = 0.5, vjust = 0.5)) +
+  theme(#legend.text = element_markdown(),
+        legend.key.size = unit(7, "pt"),
+        #axis.ticks.x = element_blank(), 
+        strip.background = element_rect(fill="white", colour = "white"),
+        axis.title.y = element_text(hjust = 0.5),
+        strip.placement = "outside",
+        legend.position = "top",
+        panel.grid = element_blank(),
+        panel.border = element_rect(colour = "black", fill = NA)) +
+  labs(y = expression("Genus Chao1"),
+       x = "Sample ID") +
+  theme(axis.text.x = element_text(hjust = 0.5, vjust = 1, angle = 0)) +
+  guides(fill = guide_legend(override.aes = list(shape = NA)), # Ensure fill legend shows only fill
+         shape = guide_legend(override.aes = list(fill = "white"))) +
+  facet_nested(cols = vars(Samples_type, pilot), 
+             # labeller = labeller(dna_type = dna_type_label,
+             #                     regrowth_day = regrowth_day_label,
+             #                     sample_type = sample_type_label),
+               scales = "free", space = "free",
+               nest_line = element_line(lineend = "round"), 
+               resect = unit(2, "mm"))
+
+# plot alpha diversity
+Shannon_genus <- 
+alpha2_genus %>% 
+ggplot(aes(x=Sample, y=Shannon)) +
+  stat_summary(aes(fill = granule_type, group = granule_type), 
+               fun = median, 
+               geom = "bar", alpha = 0.7, width= 0.9,
+               position = position_dodge2(width = 0.7, preserve = "single")) +
+  geom_point(aes(fill = granule_type, group = granule_type, shape = as.factor(year)), color="black",
+                 position = position_dodge(width = 0.9),
+                 size = 2, show.legend = F) +
+  scale_color_manual(values = colorset) +
+  scale_fill_manual(values = colorset, 
+                    #labels = PMA_label, 
+                    name=NULL) +
+  scale_shape_manual(values = c(21, 22, 23)) +
+  theme_minimal() +
+  theme(axis.text.x = element_text(angle = 0, hjust = 0.5, vjust = 0.5)) +
+  theme(#legend.text = element_markdown(),
+        legend.key.size = unit(7, "pt"),
+        #axis.ticks.x = element_blank(), 
+        strip.background = element_rect(fill="white", colour = "white"),
+        axis.title.y = element_text(hjust = 0.5),
+        strip.placement = "outside",
+        legend.position = "top",
+        panel.grid = element_blank(),
+        panel.border = element_rect(colour = "black", fill = NA)) +
+  labs(y = expression("Genus Shannon H'"),
+       x = "Sample ID") +
+  theme(axis.text.x = element_text(hjust = 0.5, vjust = 1, angle = 0)) +
+  guides(fill = guide_legend(override.aes = list(shape = NA)), # Ensure fill legend shows only fill
+         shape = guide_legend(override.aes = list(fill = "white"))) +
+  facet_nested(cols = vars(Samples_type, pilot), 
+             # labeller = labeller(dna_type = dna_type_label,
+             #                     regrowth_day = regrowth_day_label,
+             #                     sample_type = sample_type_label),
+               scales = "free", space = "free",
+               nest_line = element_line(lineend = "round"), 
+               resect = unit(2, "mm"))
+
+
+# create plot
+prow_genus = 
+  plot_grid(get_legend(Chao1_genus),
+  plot_grid(
+            Chao1_genus + theme(legend.position = "none"), 
+            Shannon_genus + theme(legend.position = "none"),
+                   align = "hv",
+                   labels = c("A", "B"),
+                   hjust = -1, 
+                   nrow = 2),
+  ncol=1,
+  rel_heights = c(0.5, 7, 7)
+  )
+
+# show plot
+prow_genus
+
+# save plot
+ggsave(prow_genus, filename = glue("figures/{proj}_plot_genus_alpha_diversity.pdf"), width = 7, height = 7)
+
+# save Chao1 plot
+ggsave(Chao1_genus, filename = glue("figures/{proj}_plot_genus_Chao1.pdf"), width = 7, height = 5)
+ 
+# save Shannon plot
+ggsave(Shannon_genus, filename = glue("figures/{proj}_plot_genus_Shannon.pdf"), width = 7, height = 5)
+
+```
+
+
+
+```{r Beta diversity, message=F, warning=F, fig.width=7, fig.height=5, echo=F, eval=T, warning=F, include=T, cache=F}
+
+### Beta diversity analysis first
+# input data  = psdata_plot1_Genus
+# psdata_Genus_clr = microbiome::transform(psdata_ELLY_rare, transform = "clr")
+
+
+# ordination
+pcoa_BC <- ordinate(psdata_plot1_Genus, method = "PCoA", distance = "bray")
+pcoa_Jac <- ordinate(psdata_plot1_Genus, method = "PCoA", distance = "jaccard")
+pcoa_uu <- ordinate(psdata_plot1_Genus, method = "PCoA", distance = "uunifrac")
+pcoa_wu <- ordinate(psdata_plot1_Genus, method = "PCoA", distance = "wunifrac")
+
+plot_pcoa_bc <- 
+  plot_ordination(physeq = psdata_plot1_Genus, 
+                  ordination = pcoa_BC, 
+                  type = "samples", 
+                  axes = c(1,2),
+                  justDF = T
+                  ) %>% 
+  as_tibble(rownames="Sample") %>% 
+  ggplot(aes(x=Axis.1, y=Axis.2)) +
+  facet_nested(rows=vars(Samples_type), 
+               cols= vars(pilot)) +
+  labs(x=expression("PCoA 1  (62.1%)"),
+       y=expression("PCoA 2  (16.5%)")) +
+  geom_point(aes(
+             color = granule_type, 
+             shape = as.factor(year),
+             fill = granule_type),
+             size=2, show.legend = T) +
+  ggrepel::geom_text_repel(aes(label = Sample), size = 2, min.segment.length = 1) +
+  scale_color_manual(values = brewer.pal(6, "Dark2")) +
+  scale_shape_manual(values = c(21, 22)) +
+  scale_fill_manual(values = brewer.pal(6, "Dark2")) +
+  theme_minimal() +
+  ggtitle(glue::glue("Bray-Curtis PCoA ordination at rarefied Genus-level relative abundance")) +
+    # guides(
+    # color = guide_legend(order = 1),
+    # shape = guide_legend(order = 2),
+    # fill =  guide_legend(
+    #   order = 3,
+    #   override.aes = list(
+    #     shape = 21, # Choose a shape that allows fill
+    #     color = "grey", # Outline color for the shapes
+    #     fill = c("white", "grey")))) + # Fill colors for the shapes
+theme(
+  plot.title = element_text(hjust = 0, vjust = 0.5),
+  panel.background = element_rect(fill='transparent'),
+  panel.grid = element_blank(),
+  strip.text.y = element_text(face = "bold", angle = 90),
+  strip.text = element_text(face = "bold"),
+  panel.border = element_rect(colour = "black", fill=NA, linewidth = 0.3),
+  axis.line.x = element_line(color="black", size = 0.3),
+  axis.line.y = element_line(color="black", size = 0.3)) 
+
+plot_pcoa_bc
+# save plot
+ggsave(plot = plot_pcoa_bc, filename = glue("figures/{proj}_plot_beta_diversity_BC_genus.pdf"), width = 8, height =8)
+
+# save plot data
+plot_ordination(physeq = psdata_plot1_Genus, 
+                  ordination = pcoa_BC, 
+                  type = "samples", 
+                  axes = c(1,2),
+                  justDF = T
+                  ) %>% 
+  as_tibble(rownames="Sample") %>% 
+  write_csv(glue::glue("output_data/{proj}_data_plot_beta_diversity_BC_genus.csv"))
+
+```
+
+

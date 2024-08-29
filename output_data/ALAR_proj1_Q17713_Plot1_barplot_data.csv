@@ -1,0 +1,190 @@
+Genus,Sample,Samples_type,pilot,granule_type,year,mean_abundance,mean
+Amb-16S-1323,ALAR.1,Granules,A_used_granules,Whole_granules,2022,0.991297514027707,1.6593632762085309
+Amb-16S-1323,ALAR.2,Granules,A_used_granules,Backwashed_granules,2022,1.0505486598309048,1.6593632762085309
+Amb-16S-1323,ALAR.3,Granules,B_virgin_granules,Whole_granules,2022,1.7855228404627543,1.6593632762085309
+Amb-16S-1323,ALAR.4,Granules,B_virgin_granules,Backwashed_granules,2022,1.697757425885412,1.6593632762085309
+Amb-16S-1323,ALAR.5,Granules,B_virgin_granules,Whole_granules,2023,4.516589750269827,1.6593632762085309
+Amb-16S-1323,ALAR.6,Granules,B_virgin_granules,Backwashed_granules,2023,4.422257683547507,1.6593632762085309
+Amb-16S-1323,ALAR.7,Backwash_water,A_used_granules,NA,2022,0.3421077303257099,1.6593632762085309
+Amb-16S-1323,ALAR.8,Backwash_water,A_used_granules,NA,2022,0.0756339198698977,1.6593632762085309
+Amb-16S-1323,ALAR.9,Backwash_water,A_used_granules,NA,2023,0.05255396165705859,1.6593632762085309
+Bradyrhizobium,ALAR.1,Granules,A_used_granules,Whole_granules,2022,4.366141314367762,3.262589408860766
+Bradyrhizobium,ALAR.2,Granules,A_used_granules,Backwashed_granules,2022,4.966270912034539,3.262589408860766
+Bradyrhizobium,ALAR.3,Granules,B_virgin_granules,Whole_granules,2022,2.4588299887267757,3.262589408860766
+Bradyrhizobium,ALAR.4,Granules,B_virgin_granules,Backwashed_granules,2022,2.1113768247540263,3.262589408860766
+Bradyrhizobium,ALAR.5,Granules,B_virgin_granules,Whole_granules,2023,7.082744054486583,3.262589408860766
+Bradyrhizobium,ALAR.6,Granules,B_virgin_granules,Backwashed_granules,2023,7.449631639625453,3.262589408860766
+Bradyrhizobium,ALAR.7,Backwash_water,A_used_granules,NA,2022,0.6104517980113883,3.262589408860766
+Bradyrhizobium,ALAR.8,Backwash_water,A_used_granules,NA,2022,0.15724680573741576,3.262589408860766
+Bradyrhizobium,ALAR.9,Backwash_water,A_used_granules,NA,2023,0.16061134200294944,3.262589408860766
+Defluviimonas,ALAR.1,Granules,A_used_granules,Whole_granules,2022,0.2577410782292592,0.8032841287846584
+Defluviimonas,ALAR.2,Granules,A_used_granules,Backwashed_granules,2022,0.16100017988846915,0.8032841287846584
+Defluviimonas,ALAR.3,Granules,B_virgin_granules,Whole_granules,2022,3.538882878668265,0.8032841287846584
+Defluviimonas,ALAR.4,Granules,B_virgin_granules,Backwashed_granules,2022,0.8102663152231288,0.8032841287846584
+Defluviimonas,ALAR.5,Granules,B_virgin_granules,Whole_granules,2023,0.17236406267445756,0.8032841287846584
+Defluviimonas,ALAR.6,Granules,B_virgin_granules,Backwashed_granules,2023,0.15817000815454266,0.8032841287846584
+Defluviimonas,ALAR.7,Backwash_water,A_used_granules,NA,2022,0.4409899543443613,0.8032841287846584
+Defluviimonas,ALAR.8,Backwash_water,A_used_granules,NA,2022,1.2313680472099156,0.8032841287846584
+Defluviimonas,ALAR.9,Backwash_water,A_used_granules,NA,2023,0.4587746346695267,0.8032841287846584
+Ferruginibacter,ALAR.1,Granules,A_used_granules,Whole_granules,2022,0.8397070243755272,1.4154604137079785
+Ferruginibacter,ALAR.2,Granules,A_used_granules,Backwashed_granules,2022,0.8675121424716675,1.4154604137079785
+Ferruginibacter,ALAR.3,Granules,B_virgin_granules,Whole_granules,2022,0.41925349811084145,1.4154604137079785
+Ferruginibacter,ALAR.4,Granules,B_virgin_granules,Backwashed_granules,2022,1.0188581253214164,1.4154604137079785
+Ferruginibacter,ALAR.5,Granules,B_virgin_granules,Whole_granules,2023,0.5322118426439392,1.4154604137079785
+Ferruginibacter,ALAR.6,Granules,B_virgin_granules,Backwashed_granules,2023,0.5237184714450412,1.4154604137079785
+Ferruginibacter,ALAR.7,Backwash_water,A_used_granules,NA,2022,0.7786754027372157,1.4154604137079785
+Ferruginibacter,ALAR.8,Backwash_water,A_used_granules,NA,2022,2.590685966768907,1.4154604137079785
+Ferruginibacter,ALAR.9,Backwash_water,A_used_granules,NA,2023,5.1685212494972514,1.4154604137079785
+Flavobacterium,ALAR.1,Granules,A_used_granules,Whole_granules,2022,0.341357945371555,2.0678335364584504
+Flavobacterium,ALAR.2,Granules,A_used_granules,Backwashed_granules,2022,0.17269293038316244,2.0678335364584504
+Flavobacterium,ALAR.3,Granules,B_virgin_granules,Whole_granules,2022,0.1184175901289436,2.0678335364584504
+Flavobacterium,ALAR.4,Granules,B_virgin_granules,Backwashed_granules,2022,0.605917625753366,2.0678335364584504
+Flavobacterium,ALAR.5,Granules,B_virgin_granules,Whole_granules,2023,0.19818378056496336,2.0678335364584504
+Flavobacterium,ALAR.6,Granules,B_virgin_granules,Backwashed_granules,2023,0.12231813963951298,2.0678335364584504
+Flavobacterium,ALAR.7,Backwash_water,A_used_granules,NA,2022,0.6617502684325133,2.0678335364584504
+Flavobacterium,ALAR.8,Backwash_water,A_used_granules,NA,2022,4.708136774826162,2.0678335364584504
+Flavobacterium,ALAR.9,Backwash_water,A_used_granules,NA,2023,11.681726773025876,2.0678335364584504
+Genus of Actinobacteria,ALAR.1,Granules,A_used_granules,Whole_granules,2022,0.15326655157708116,1.3623620242108967
+Genus of Actinobacteria,ALAR.2,Granules,A_used_granules,Backwashed_granules,2022,0.03980032379924447,1.3623620242108967
+Genus of Actinobacteria,ALAR.3,Granules,B_virgin_granules,Whole_granules,2022,0.10655958727652537,1.3623620242108967
+Genus of Actinobacteria,ALAR.4,Granules,B_virgin_granules,Backwashed_granules,2022,0.05380276956969665,1.3623620242108967
+Genus of Actinobacteria,ALAR.5,Granules,B_virgin_granules,Whole_granules,2023,0.08187874502214448,1.3623620242108967
+Genus of Actinobacteria,ALAR.6,Granules,B_virgin_granules,Backwashed_granules,2023,0.035324635154514526,1.3623620242108967
+Genus of Actinobacteria,ALAR.7,Backwash_water,A_used_granules,NA,2022,4.453237906385598,1.3623620242108967
+Genus of Actinobacteria,ALAR.8,Backwash_water,A_used_granules,NA,2022,4.744010570811884,1.3623620242108967
+Genus of Actinobacteria,ALAR.9,Backwash_water,A_used_granules,NA,2023,2.5933771283013805,1.3623620242108967
+Genus of Chitinophagaceae,ALAR.1,Granules,A_used_granules,Whole_granules,2022,0.5400643980237367,1.3523235390392505
+Genus of Chitinophagaceae,ALAR.2,Granules,A_used_granules,Backwashed_granules,2022,0.5617017449181507,1.3523235390392505
+Genus of Chitinophagaceae,ALAR.3,Granules,B_virgin_granules,Whole_granules,2022,0.7217137900451254,1.3523235390392505
+Genus of Chitinophagaceae,ALAR.4,Granules,B_virgin_granules,Backwashed_granules,2022,1.8174134276098162,1.3523235390392505
+Genus of Chitinophagaceae,ALAR.5,Granules,B_virgin_granules,Whole_granules,2023,1.0888477427518701,1.3523235390392505
+Genus of Chitinophagaceae,ALAR.6,Granules,B_virgin_granules,Backwashed_granules,2023,1.1650099822849591,1.3523235390392505
+Genus of Chitinophagaceae,ALAR.7,Backwash_water,A_used_granules,NA,2022,1.1018557663903035,1.3523235390392505
+Genus of Chitinophagaceae,ALAR.8,Backwash_water,A_used_granules,NA,2022,2.1682720190370275,1.3523235390392505
+Genus of Chitinophagaceae,ALAR.9,Backwash_water,A_used_granules,NA,2023,3.0060329802922645,1.3523235390392505
+Genus of Comamonadaceae,ALAR.1,Granules,A_used_granules,Whole_granules,2022,0.915688498304384,1.958324420847111
+Genus of Comamonadaceae,ALAR.2,Granules,A_used_granules,Backwashed_granules,2022,0.8546950890447922,1.958324420847111
+Genus of Comamonadaceae,ALAR.3,Granules,B_virgin_granules,Whole_granules,2022,0.7176528301641601,1.958324420847111
+Genus of Comamonadaceae,ALAR.4,Granules,B_virgin_granules,Backwashed_granules,2022,0.9961149987525225,1.958324420847111
+Genus of Comamonadaceae,ALAR.5,Granules,B_virgin_granules,Whole_granules,2023,0.8781030183482824,1.958324420847111
+Genus of Comamonadaceae,ALAR.6,Granules,B_virgin_granules,Backwashed_granules,2023,0.8871580012934791,1.958324420847111
+Genus of Comamonadaceae,ALAR.7,Backwash_water,A_used_granules,NA,2022,1.4324655636905888,1.958324420847111
+Genus of Comamonadaceae,ALAR.8,Backwash_water,A_used_granules,NA,2022,6.141593872755646,1.958324420847111
+Genus of Comamonadaceae,ALAR.9,Backwash_water,A_used_granules,NA,2023,4.801447915270144,1.958324420847111
+Genus of Microtrichaceae,ALAR.1,Granules,A_used_granules,Whole_granules,2022,2.4166950666048383,1.6605715985111005
+Genus of Microtrichaceae,ALAR.2,Granules,A_used_granules,Backwashed_granules,2022,2.6097319661809677,1.6605715985111005
+Genus of Microtrichaceae,ALAR.3,Granules,B_virgin_granules,Whole_granules,2022,0.28491694524851446,1.6605715985111005
+Genus of Microtrichaceae,ALAR.4,Granules,B_virgin_granules,Backwashed_granules,2022,1.2021609364736954,1.6605715985111005
+Genus of Microtrichaceae,ALAR.5,Granules,B_virgin_granules,Whole_granules,2023,4.10324165395065,1.6605715985111005
+Genus of Microtrichaceae,ALAR.6,Granules,B_virgin_granules,Backwashed_granules,2023,3.6252565869021174,1.6605715985111005
+Genus of Microtrichaceae,ALAR.7,Backwash_water,A_used_granules,NA,2022,0.4342680858064208,1.6605715985111005
+Genus of Microtrichaceae,ALAR.8,Backwash_water,A_used_granules,NA,2022,0.15545311593812966,1.6605715985111005
+Genus of Microtrichaceae,ALAR.9,Backwash_water,A_used_granules,NA,2023,0.11342002949457032,1.6605715985111005
+Genus of Vicinamibacterales,ALAR.1,Granules,A_used_granules,Whole_granules,2022,1.6648881787352436,1.3583405306980025
+Genus of Vicinamibacterales,ALAR.2,Granules,A_used_granules,Backwashed_granules,2022,2.2263446663068898,1.3583405306980025
+Genus of Vicinamibacterales,ALAR.3,Granules,B_virgin_granules,Whole_granules,2022,0.1409965270671098,1.3583405306980025
+Genus of Vicinamibacterales,ALAR.4,Granules,B_virgin_granules,Backwashed_granules,2022,0.6430873624592448,1.3583405306980025
+Genus of Vicinamibacterales,ALAR.5,Granules,B_virgin_granules,Whole_granules,2023,2.862499534779858,1.3583405306980025
+Genus of Vicinamibacterales,ALAR.6,Granules,B_virgin_granules,Backwashed_granules,2023,3.306631892697466,1.3583405306980025
+Genus of Vicinamibacterales,ALAR.7,Backwash_water,A_used_granules,NA,2022,0.4747761883113782,1.3583405306980025
+Genus of Vicinamibacterales,ALAR.8,Backwash_water,A_used_granules,NA,2022,0.2609818657961292,1.3583405306980025
+Genus of Vicinamibacterales,ALAR.9,Backwash_water,A_used_granules,NA,2023,0.6448585601287036,1.3583405306980025
+Hyphomicrobium,ALAR.1,Granules,A_used_granules,Whole_granules,2022,3.559955528490259,2.6167352931449392
+Hyphomicrobium,ALAR.2,Granules,A_used_granules,Backwashed_granules,2022,3.606089224680698,2.6167352931449392
+Hyphomicrobium,ALAR.3,Granules,B_virgin_granules,Whole_granules,2022,4.914411209548779,2.6167352931449392
+Hyphomicrobium,ALAR.4,Granules,B_virgin_granules,Backwashed_granules,2022,2.9934367410117977,2.6167352931449392
+Hyphomicrobium,ALAR.5,Granules,B_virgin_granules,Whole_granules,2023,3.2460735420000746,2.6167352931449392
+Hyphomicrobium,ALAR.6,Granules,B_virgin_granules,Backwashed_granules,2023,3.0110297219019766,2.6167352931449392
+Hyphomicrobium,ALAR.7,Backwash_water,A_used_granules,NA,2022,1.1326348486429785,2.6167352931449392
+Hyphomicrobium,ALAR.8,Backwash_water,A_used_granules,NA,2022,0.5070163165982075,2.6167352931449392
+Hyphomicrobium,ALAR.9,Backwash_water,A_used_granules,NA,2023,0.5799705054296823,2.6167352931449392
+Nitrosomonas,ALAR.1,Granules,A_used_granules,Whole_granules,2022,6.8411260901386095,9.554201546679693
+Nitrosomonas,ALAR.2,Granules,A_used_granules,Backwashed_granules,2022,6.869715776218745,9.554201546679693
+Nitrosomonas,ALAR.3,Granules,B_virgin_granules,Whole_granules,2022,18.693735400849228,9.554201546679693
+Nitrosomonas,ALAR.4,Granules,B_virgin_granules,Backwashed_granules,2022,26.61862322616342,9.554201546679693
+Nitrosomonas,ALAR.5,Granules,B_virgin_granules,Whole_granules,2023,10.965238750976962,9.554201546679693
+Nitrosomonas,ALAR.6,Granules,B_virgin_granules,Backwashed_granules,2023,9.685101088209656,9.554201546679693
+Nitrosomonas,ALAR.7,Backwash_water,A_used_granules,NA,2022,2.7970048768925158,9.554201546679693
+Nitrosomonas,ALAR.8,Backwash_water,A_used_granules,NA,2022,2.1138634284586826,9.554201546679693
+Nitrosomonas,ALAR.9,Backwash_water,A_used_granules,NA,2023,1.4034052822094114,9.554201546679693
+Nitrosospira,ALAR.1,Granules,A_used_granules,Whole_granules,2022,3.4072476642214786,0.8132006007604887
+Nitrosospira,ALAR.2,Granules,A_used_granules,Backwashed_granules,2022,3.5249145529771546,0.8132006007604887
+Nitrosospira,ALAR.3,Granules,B_virgin_granules,Whole_granules,2022,0.0761836073669061,0.8132006007604887
+Nitrosospira,ALAR.4,Granules,B_virgin_granules,Backwashed_granules,2022,0.04344955523609572,0.8132006007604887
+Nitrosospira,ALAR.5,Granules,B_virgin_granules,Whole_granules,2023,0.0407067624399866,0.8132006007604887
+Nitrosospira,ALAR.6,Granules,B_virgin_granules,Backwashed_granules,2023,0.031985490537918625,0.8132006007604887
+Nitrosospira,ALAR.7,Backwash_water,A_used_granules,NA,2022,0.11356420003573205,0.8132006007604887
+Nitrosospira,ALAR.8,Backwash_water,A_used_granules,NA,2022,0.03946117558429445,0.8132006007604887
+Nitrosospira,ALAR.9,Backwash_water,A_used_granules,NA,2023,0.04129239844483174,0.8132006007604887
+Nitrospira,ALAR.1,Granules,A_used_granules,Whole_granules,2022,28.54128606093789,15.894546869971352
+Nitrospira,ALAR.2,Granules,A_used_granules,Backwashed_granules,2022,27.453228998021228,15.894546869971352
+Nitrospira,ALAR.3,Granules,B_virgin_granules,Whole_granules,2022,29.77333346328405,15.894546869971352
+Nitrospira,ALAR.4,Granules,B_virgin_granules,Backwashed_granules,2022,25.689888982991874,15.894546869971352
+Nitrospira,ALAR.5,Granules,B_virgin_granules,Whole_granules,2023,13.79587070601809,15.894546869971352
+Nitrospira,ALAR.6,Granules,B_virgin_granules,Backwashed_granules,2023,13.619316424373647,15.894546869971352
+Nitrospira,ALAR.7,Backwash_water,A_used_granules,NA,2022,2.6551380724865075,15.894546869971352
+Nitrospira,ALAR.8,Backwash_water,A_used_granules,NA,2022,0.9793546304102169,15.894546869971352
+Nitrospira,ALAR.9,Backwash_water,A_used_granules,NA,2023,0.543504491218662,15.894546869971352
+Novosphingobium,ALAR.1,Granules,A_used_granules,Whole_granules,2022,0.5592459956087178,1.1708991495904235
+Novosphingobium,ALAR.2,Granules,A_used_granules,Backwashed_granules,2022,0.41396833962942975,1.1708991495904235
+Novosphingobium,ALAR.3,Granules,B_virgin_granules,Whole_granules,2022,1.9919820408110225,1.1708991495904235
+Novosphingobium,ALAR.4,Granules,B_virgin_granules,Backwashed_granules,2022,1.865785002775001,1.1708991495904235
+Novosphingobium,ALAR.5,Granules,B_virgin_granules,Whole_granules,2023,0.22284044810004094,1.1708991495904235
+Novosphingobium,ALAR.6,Granules,B_virgin_granules,Backwashed_granules,2023,0.20544526614740038,1.1708991495904235
+Novosphingobium,ALAR.7,Backwash_water,A_used_granules,NA,2022,0.6886377425842755,1.1708991495904235
+Novosphingobium,ALAR.8,Backwash_water,A_used_granules,NA,2022,3.454646553425051,1.1708991495904235
+Novosphingobium,ALAR.9,Backwash_water,A_used_granules,NA,2023,1.135540957232873,1.1708991495904235
+Other (< 3%),ALAR.1,Granules,A_used_granules,Whole_granules,2022,34.81161995109624,1.8048710582067305e-5
+Other (< 3%),ALAR.2,Granules,A_used_granules,Backwashed_granules,2022,34.086616297895304,1.8048710582067305e-5
+Other (< 3%),ALAR.3,Granules,B_virgin_granules,Whole_granules,2022,31.39885448443678,1.8048710582067305e-5
+Other (< 3%),ALAR.4,Granules,B_virgin_granules,Backwashed_granules,2022,28.772091807552414,1.8048710582067305e-5
+Other (< 3%),ALAR.5,Granules,B_virgin_granules,Whole_granules,2023,41.132438870073315,1.8048710582067305e-5
+Other (< 3%),ALAR.6,Granules,B_virgin_granules,Backwashed_granules,2023,41.67217332620982,1.8048710582067305e-5
+Other (< 3%),ALAR.7,Backwash_water,A_used_granules,NA,2022,59.75546549824082,1.8048710582067305e-5
+Other (< 3%),ALAR.8,Backwash_water,A_used_granules,NA,2022,64.06013644000406,1.8048710582067305e-5
+Other (< 3%),ALAR.9,Backwash_water,A_used_granules,NA,2023,61.307950127362915,1.8048710582067305e-5
+PLTA13,ALAR.1,Granules,A_used_granules,Whole_granules,2022,3.5052041722768186,1.5130717486035652
+PLTA13,ALAR.2,Granules,A_used_granules,Backwashed_granules,2022,3.952149667206332,1.5130717486035652
+PLTA13,ALAR.3,Granules,B_virgin_granules,Whole_granules,2022,0.11127030073844493,1.5130717486035652
+PLTA13,ALAR.4,Granules,B_virgin_granules,Backwashed_granules,2022,0.14341747724414405,1.5130717486035652
+PLTA13,ALAR.5,Granules,B_virgin_granules,Whole_granules,2023,2.2923722505489597,1.5130717486035652
+PLTA13,ALAR.6,Granules,B_virgin_granules,Backwashed_granules,2023,2.6395059471923066,1.5130717486035652
+PLTA13,ALAR.7,Backwash_water,A_used_granules,NA,2022,0.4514265397059006,1.5130717486035652
+PLTA13,ALAR.8,Backwash_water,A_used_granules,NA,2022,0.08041709266799399,1.5130717486035652
+PLTA13,ALAR.9,Backwash_water,A_used_granules,NA,2023,0.4418822898511865,1.5130717486035652
+PeM15,ALAR.1,Granules,A_used_granules,Whole_granules,2022,0.13427118309486696,1.353245914118021
+PeM15,ALAR.2,Granules,A_used_granules,Backwashed_granules,2022,0.026983270372369132,1.353245914118021
+PeM15,ALAR.3,Granules,B_virgin_granules,Whole_granules,2022,0.05522905438112596,1.353245914118021
+PeM15,ALAR.4,Granules,B_virgin_granules,Backwashed_granules,2022,0.04480735383722371,1.353245914118021
+PeM15,ALAR.5,Granules,B_virgin_granules,Whole_granules,2023,0.09397446871859765,1.353245914118021
+PeM15,ALAR.6,Granules,B_virgin_granules,Backwashed_granules,2023,0.04253015774822147,1.353245914118021
+PeM15,ALAR.7,Backwash_water,A_used_granules,NA,2022,8.522091067167386,1.353245914118021
+PeM15,ALAR.8,Backwash_water,A_used_granules,NA,2022,2.009829420100088,1.353245914118021
+PeM15,ALAR.9,Backwash_water,A_used_granules,NA,2023,1.2494972516423113,1.353245914118021
+Pedomicrobium,ALAR.1,Granules,A_used_granules,Whole_granules,2022,3.016352777513953,1.3380267343670074
+Pedomicrobium,ALAR.2,Granules,A_used_granules,Backwashed_granules,2022,3.445313905378665,1.3380267343670074
+Pedomicrobium,ALAR.3,Granules,B_virgin_granules,Whole_granules,2022,1.1409672881559667,1.3380267343670074
+Pedomicrobium,ALAR.4,Granules,B_virgin_granules,Backwashed_granules,2022,0.9384085582045829,1.3380267343670074
+Pedomicrobium,ALAR.5,Granules,B_virgin_granules,Whole_granules,2023,1.2070136588633742,1.3380267343670074
+Pedomicrobium,ALAR.6,Granules,B_virgin_granules,Backwashed_granules,2023,1.2859221662964315,1.3380267343670074
+Pedomicrobium,ALAR.7,Backwash_water,A_used_granules,NA,2022,0.49989474968999803,1.3380267343670074
+Pedomicrobium,ALAR.8,Backwash_water,A_used_granules,NA,2022,0.17936897992861114,1.3380267343670074
+Pedomicrobium,ALAR.9,Backwash_water,A_used_granules,NA,2023,0.3289985252714841,1.3380267343670074
+Planktothrix_NIVA-CYA_15,ALAR.1,Granules,A_used_granules,Whole_granules,2022,0.08249949252569495,0.8885195511726935
+Planktothrix_NIVA-CYA_15,ALAR.2,Granules,A_used_granules,Backwashed_granules,2022,0.012367332254002519,0.8885195511726935
+Planktothrix_NIVA-CYA_15,ALAR.3,Granules,B_virgin_granules,Whole_granules,2022,0.012507756433372645,0.8885195511726935
+Planktothrix_NIVA-CYA_15,ALAR.4,Granules,B_virgin_granules,Backwashed_granules,2022,0.013577986011279911,0.8885195511726935
+Planktothrix_NIVA-CYA_15,ALAR.5,Granules,B_virgin_granules,Whole_granules,2023,0.013956604265138263,0.8885195511726935
+Planktothrix_NIVA-CYA_15,ALAR.6,Granules,B_virgin_granules,Backwashed_granules,2023,0.013708067373393695,0.8885195511726935
+Planktothrix_NIVA-CYA_15,ALAR.7,Backwash_water,A_used_granules,NA,2022,6.495093920423689,0.8885195511726935
+Planktothrix_NIVA-CYA_15,ALAR.8,Backwash_water,A_used_granules,NA,2022,0.9829420100087891,0.8885195511726935
+Planktothrix_NIVA-CYA_15,ALAR.9,Backwash_water,A_used_granules,NA,2023,0.3700227912588819,0.8885195511726935
+Terrimonas,ALAR.1,Granules,A_used_granules,Whole_granules,2022,3.0543435144783815,3.846283402834886
+Terrimonas,ALAR.2,Granules,A_used_granules,Backwashed_granules,2022,3.0983540205072853,3.846283402834886
+Terrimonas,ALAR.3,Granules,B_virgin_granules,Whole_granules,2022,1.5387789180953124,3.846283402834886
+Terrimonas,ALAR.4,Granules,B_virgin_granules,Backwashed_granules,2022,1.9197574971698386,3.846283402834886
+Terrimonas,ALAR.5,Granules,B_virgin_granules,Whole_granules,2023,5.472849752502884,3.846283402834886
+Terrimonas,ALAR.6,Granules,B_virgin_granules,Backwashed_granules,2023,6.0978053032646296,3.846283402834886
+Terrimonas,ALAR.7,Backwash_water,A_used_granules,NA,2022,6.158469819694721,3.846283402834886
+Terrimonas,ALAR.8,Backwash_water,A_used_granules,NA,2022,3.359580994062887,3.846283402834886
+Terrimonas,ALAR.9,Backwash_water,A_used_granules,NA,2023,3.9166108057380344,3.846283402834886
