@@ -449,6 +449,21 @@ Genus_pool <-
 ```{r plot 1 barplot, warning=F, message=F}
 
 # data
+plot1_data_full = 
+  psmelt_plot1_Genus %>% 
+  group_by(Genus, Sample,Samples_type, pilot, granule_type, year) %>%
+  summarize(mean_abundance = sum(mean_abundance), 
+            .groups = "drop") %>% 
+  mutate(Genus = factor(Genus), 
+         Genus = fct_reorder(Genus, mean_abundance, .desc = T)) %>%
+  group_by(Sample) %>% 
+  arrange(desc(mean_abundance), .by_group = T)
+
+# save plot data
+write_csv(plot1_data_full, file = glue::glue("output_data/{proj}_Plot1_barplot_data_full.csv"))
+saveRDS(plot1_data_full, glue("output_data/{proj}_plot1_data_full.RDS"))
+
+# data
 plot1_data = 
   inner_join(psmelt_plot1_Genus, Genus_pool, by="Genus") %>% 
   mutate(Genus = if_else(pool, "Other (< 3%)", Genus)) %>% 
